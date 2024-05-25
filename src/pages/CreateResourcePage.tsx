@@ -1,7 +1,7 @@
 import { Hero } from "../components/Hero"
 import Navbar from "../components/Navbar"
 
-export const HomePage = () => {
+export const CreateResourcePage = () => {
   return (
     <div>
         <Navbar/>

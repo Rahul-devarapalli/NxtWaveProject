@@ -1,9 +1,8 @@
 import styled from "styled-components";
 import Navbar from "../components/Navbar";
-import { Card } from "../components/Card";
-import Pagination from "../components/Pagination";
-import { data } from "../components/data";
-import { useState } from "react";
+import { Card, CardDetails } from "../components/Card";
+import { useEffect, useState } from "react";
+import { getResourcesList } from "../api/resources";
 
 const Tab = styled.button`
   width: 200px;
@@ -49,21 +48,31 @@ const CardWrapper = styled.div`
   flex-direction: row;
   flex-wrap: wrap;
   align-items: center;
-  margin: 0px 194px;
+  margin: 0px 190px;
 `;
 
 export const ResourcesPage = () => {
-    const [currentPage, setCurrentPage] = useState<number>(1);
-    const itemsPerPage = 6;
+  const [data, setData] = useState<CardDetails[] | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
-    const totalPages = Math.ceil(data.length / itemsPerPage);
-
-    const handlePageChange = (page: number) => {
-      setCurrentPage(page);
+  useEffect(() => {
+    const fetchDataAsync = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const result = await getResourcesList();
+        setData(result);
+      } catch (error) {
+        setError((error as Error).message);
+      } finally {
+        setLoading(false);
+      }
     };
 
-     const startIndex = (currentPage - 1) * itemsPerPage;
-     const currentData = data.slice(startIndex, startIndex + itemsPerPage);
+    fetchDataAsync();
+  }, []);
+
   return (
     <>
       <Navbar isResourcesPage />
@@ -75,22 +84,11 @@ export const ResourcesPage = () => {
         </TabsWrapper>
         <SearchBar />
         <CardWrapper>
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          <Card />
-          
+          {loading && <div>Loading...</div>}
+          {error && <div>Error: {error}</div>}
+          {data && data.map((item, index) => <Card key={index} data={item} />)}
+          {!loading && !error && !data && <div>No data available</div>}
         </CardWrapper>
-
-        <Pagination
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPageChange={handlePageChange}
-        />
       </ResourcePageWrapper>
     </>
   );

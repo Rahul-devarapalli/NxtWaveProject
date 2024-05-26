@@ -1,56 +1,72 @@
-// src/components/Pagination.tsx
+
+
 import React from "react";
 import styled from "styled-components";
 
-interface PaginationProps {
-  currentPage: number;
-  totalPages: number;
-  onPageChange: (page: number) => void;
-}
-
-const PaginationContainer = styled.div`
+const PaginationWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 20px;
+  margin: 35px 0;
 `;
 
-const Button = styled.button`
+const PageButton = styled.button`
   margin: 0 5px;
   padding: 10px;
+  border: 1px solid #d7dfe9;
+  background-color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
 `;
 
-const PageInfo = styled.span`
-  margin: 0 10px;
-`;
+interface PaginationProps {
+  resourcesPerPage: number;
+  totalResources: number;
+  currentPage: number;
+  paginate: (pageNumber: number) => void;
+}
 
 const Pagination: React.FC<PaginationProps> = ({
+  resourcesPerPage,
+  totalResources,
   currentPage,
-  totalPages,
-  onPageChange,
+  paginate,
 }) => {
-  const handlePrevious = () => {
-    if (currentPage > 1) {
-      onPageChange(currentPage - 1);
-    }
-  };
+  const pageNumbers = [];
 
-  const handleNext = () => {
-    if (currentPage < totalPages) {
-      onPageChange(currentPage + 1);
-    }
-  };
+  for (let i = 1; i <= Math.ceil(totalResources / resourcesPerPage); i++) {
+    pageNumbers.push(i);
+  }
 
   return (
-    <PaginationContainer>
-      <Button onClick={handlePrevious} disabled={currentPage === 1}>
+    <PaginationWrapper>
+      <PageButton
+        onClick={() => paginate(currentPage - 1)}
+        disabled={currentPage === 1}
+      >
         Previous
-      </Button>
-      <PageInfo>{`Page ${currentPage} of ${totalPages}`}</PageInfo>
-      <Button onClick={handleNext} disabled={currentPage === totalPages}>
+      </PageButton>
+      {pageNumbers.map((number) => (
+        <PageButton
+          key={number}
+          onClick={() => paginate(number)}
+          disabled={currentPage === number}
+        >
+          {number}
+        </PageButton>
+      ))}
+      <PageButton
+        onClick={() => paginate(currentPage + 1)}
+        disabled={currentPage === pageNumbers.length}
+      >
         Next
-      </Button>
-    </PaginationContainer>
+      </PageButton>
+    </PaginationWrapper>
   );
 };
 

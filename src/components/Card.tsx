@@ -3,12 +3,12 @@ import styled from "styled-components";
 const Cards = styled.div`
   width: 360px;
   height: 192px;
-  top: 262px;
-  left: 148px;
   background: #ffffff;
   margin: 16px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  border: 1px solid #D7DFE9;
+  border-radius: 4px;
 `;
 
 const Icon = styled.div`
@@ -29,8 +29,7 @@ const Img = styled.img`
   margin: 12px 10px;
 `;
 
-const Title = styled.h5`
-  width: 99px;
+const Title = styled.span`
   height: 24px;
   margin-top: 30px;
   font-family: HK Grotesk;
@@ -39,27 +38,69 @@ const Title = styled.h5`
 `;
 
 const Catagory = styled.span`
-  width: 82px;
   height: 16px;
-  top: 52px;
-  left: 84px;
-
   font-family: HK Grotesk;
   font-size: 12px;
   font-weight: 400;
 `;
-export const Card = () => {
+
+const Link = styled.a`
+  height: 24px;
+  margin-left: 24px;
+  font-family: HK Grotesk;
+  font-size: 14px;
+  font-weight: 400;
+  color: #0b69ff;
+`;
+
+
+const Description = styled.div`
+  width: 312px;
+  height: 24px;
+  margin-left: 24px;
+  font-family: HK Grotesk;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24px;
+  color: #7e858e;
+`;
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+`
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+`
+
+export type CardDetails = {
+  title: string;
+  icon_url: string;
+  link: string;
+  description: string;
+  category: string;
+  tag: string;
+  id: string;
+};
+
+type CardProps = {
+  data :CardDetails
+}
+export const Card: React.FC<CardProps> = ({ data }) => {
   return (
     <Cards>
-      <div>
+      <Wrapper>
         <Icon>
-          <Img src="http://loremflickr.com/640/480" alt="logo" />
+          <Img src={data.icon_url} alt="logo" />
         </Icon>
-        <div>
-          <Title>Dropbox, Inc.</Title>
-          <Catagory>cloud services</Catagory>
-        </div>
-      </div>
+        <Container>
+          <Title>{data.title}</Title>
+          <Catagory>{data.category}</Catagory>
+        </Container>
+      </Wrapper>
+      <Link>{data.link}</Link>
+      <Description>{data.description}</Description>
     </Cards>
   );
 };

@@ -51,6 +51,7 @@ const Link = styled.a`
   font-size: 14px;
   font-weight: 400;
   color: #0b69ff;
+  cursor: pointer;
 `;
 
 

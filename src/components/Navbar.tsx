@@ -18,6 +18,7 @@ const Logo = styled.img`
 const Icon = styled.img`
   width: 40px;
   height: 40px;
+  border-radius: 50px;
 `;
 const Button = styled.button`
   background: #2dca73;
@@ -39,13 +40,13 @@ type Props = {
 const Navbar = ({ isResourcesPage = false }: Props) => {
   return (
     <NavWapper>
-      <Logo src="src\assets\nxt_logo.png" alt="logo" />
+      <Logo src="src\assets\NxtWave.svg" alt="logo" />
       {isResourcesPage && (
         <Link to="add-resource">
           <Button>ADD ITEM</Button>
         </Link>
       )}
-      <Icon src="src\assets\img.png" alt="icon" />
+      <Icon src="src\assets\image.svg" alt="icon" />
     </NavWapper>
   );
 };

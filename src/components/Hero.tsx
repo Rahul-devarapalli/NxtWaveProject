@@ -44,15 +44,22 @@ const Label = styled.label`
   color: #7e858e;
 `;
 
-const Input = styled.input<{ Height?: string; Width?: string }>`
+const Input = styled.input<{ Height?: string; Width?: string; color?: string }>`
   background: #ffffff;
   width: ${(props) => props.Width || 320}px;
   height: ${(props) => props.Height || 40}px;
   margin-top: 8px;
   gap: 0px;
-  border-radius: 2px 0px 0px 0px;
-  border: 1px 0px 0px 0px;
+  border-radius: 2px;
+  border: 1px;
   border: 1px solid #d7dfe9;
+  &::placeholder {
+    font-family: HK Grotesk;
+    font-size: 14px;
+    font-weight: 400;
+    padding-left: 10px;
+    color: ${(props) => props.color};
+  }
 `;
 
 const Button = styled.button`
@@ -65,7 +72,35 @@ const Button = styled.button`
   color: #ffffff;
   margin-top: 100px;
 `;
-const TextArea = styled.textarea``;
+const TextArea = styled.textarea`
+  width: 312px;
+  height: 80px;
+  top: 32px;
+  gap: 0px;
+  border-radius: 2px 0px 0px 0px;
+  border: 1px 0px 0px 0px;
+  opacity: 0px;
+  background: #ffffff;
+  border: 1px solid #d7dfe9;
+  &::placeholder {
+    font-family: HK Grotesk;
+    font-size: 14px;
+    font-weight: 400;
+    padding-left: 10px;
+    padding-top: 10px;
+  }
+`;
+
+const Dropdown = styled.select`
+  background: #ffffff;
+  width: 320px;
+  height: 40px;
+  margin-top: 8px;
+  gap: 0px;
+  border-radius: 2px;
+  border: 1px;
+  border: 1px solid #d7dfe9;
+`;
 
 export const Hero = () => {
   return (
@@ -74,30 +109,40 @@ export const Hero = () => {
         <FromHeader>Item Details</FromHeader>
         <FieldWrapper>
           <Label>ITEM TITLE</Label>
-          <Input value={"iB studio trainees"}></Input>
+
+          <Input placeholder="iB studio trainees"></Input>
         </FieldWrapper>
 
         <FieldWrapper>
           <Label>LINK</Label>
-          <Input placeholder={"www.slack.iB studio trainees.com"}></Input>
+          <Input
+            color="#0B69FF"
+            placeholder="www.slack.iB studio trainees.com"
+          ></Input>
         </FieldWrapper>
 
         <FieldWrapper>
           <Label>ICON URL</Label>
-          <Input placeholder={"www.slack.iB studio trainees.com"}></Input>
+          <Input
+            color="#0B69FF"
+            placeholder="www.slack.iB studio trainees.com"
+          ></Input>
         </FieldWrapper>
         <FieldWrapper>
           <Label>TAG NAME</Label>
-          <Input placeholder={"User"}></Input>
+          <Dropdown>
+            <option value="user">user</option>
+            <option value="request">request</option>
+          </Dropdown>
         </FieldWrapper>
         <FieldWrapper>
           <Label>CATEGORY</Label>
-          <Input placeholder={"slack"}></Input>
+          <Input placeholder="slack"></Input>
         </FieldWrapper>
 
         <FieldWrapper>
           <Label>DESCRIPTION</Label>
-          <Input Height="80" Width="312"></Input>
+          <TextArea placeholder="This chaneel is for iB studio trainees team." />
         </FieldWrapper>
 
         <Button>CREATE</Button>

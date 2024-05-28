@@ -82,7 +82,7 @@ export type CardDetails = {
   description: string;
   category: string;
   tag: string;
-  id: string;
+  id?: string;
 };
 
 type CardProps = {

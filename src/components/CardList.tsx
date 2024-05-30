@@ -1,4 +1,3 @@
-// src/components/CardList.tsx
 import React from "react";
 import styled from "styled-components";
 import { Card, CardDetails } from "../components/Card";

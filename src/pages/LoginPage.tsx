@@ -63,10 +63,7 @@ const Button = styled.button`
   }
 `;
 
-type loginDetails = {
-  email: string,
-  password:string
-};
+
 
 const LoginPage = () => {
     const navigate = useNavigate();

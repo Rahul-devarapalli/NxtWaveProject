@@ -71,12 +71,12 @@ export const ResourcesPage: React.FC = () => {
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
-    setCurrentPage(1); // Reset pagination when tab changes
+    setCurrentPage(1); 
   };
 
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchQuery(e.target.value);
-    setCurrentPage(1); // Reset pagination when search query changes
+    setCurrentPage(1); 
   };
 
   const paginate = (pageNumber: number) => setCurrentPage(pageNumber);

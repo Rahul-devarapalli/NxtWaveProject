@@ -1,6 +1,5 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import styled from "styled-components";
-import { addResources } from "../api/resources";
 import { useNavigate } from "react-router-dom";
 
 const HeroWrapper = styled.div`
@@ -11,96 +10,96 @@ const HeroWrapper = styled.div`
 
 const HeroImg = styled.img`
   width: 100%;
-  max-width: 45rem; /* 720px in rem */
+  max-width: 45rem; 
   height: auto;
 `;
 
 const FormWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  width: 52.6875rem; /* 843px in rem */
+  width: 52.6875rem; 
   align-items: center;
 `;
 
 const FormHeader = styled.h1`
-  width: 11.125rem; /* 178px in rem */
-  margin-top: 9.5rem; /* 152px in rem */
+  width: 11.125rem; 
+  margin-top: 9.5rem; 
   font-family: Rubik;
-  font-size: 2rem; /* 32px in rem */
+  font-size: 2rem; 
   font-weight: 400;
 `;
 
 const FieldWrapper = styled.div`
   text-align: left;
-  width: 20rem; /* 320px in rem */
-  height: 4rem; /* 64px in rem */
-  border-radius: 0.125rem 0 0 0; /* 2px in rem */
+  width: 20rem; 
+  height: 4rem; 
+  border-radius: 0.125rem 0 0 0; 
   border: 1px solid transparent;
-  margin-top: 2rem; /* 32px in rem */
+  margin-top: 2rem; 
 `;
 
 const Label = styled.label`
   font-family: HK Grotesk;
-  font-size: 0.75rem; /* 12px in rem */
+  font-size: 0.75rem; 
   font-weight: 600;
-  line-height: 1rem; /* 16px in rem */
+  line-height: 1rem; 
   letter-spacing: 0.01em;
   color: #7e858e;
 `;
 
 const Input = styled.input<{ Height?: string; Width?: string; color?: string }>`
   background: #ffffff;
-  width: ${(props) => props.Width || "20rem"}; /* 320px in rem */
-  height: ${(props) => props.Height || "2.5rem"}; /* 40px in rem */
-  margin-top: 0.5rem; /* 8px in rem */
+  width: ${(props) => props.Width || "20rem"};
+  height: ${(props) => props.Height || "2.5rem"}; 
+  margin-top: 0.5rem;
   gap: 0;
-  border-radius: 0.125rem; /* 2px in rem */
+  border-radius: 0.125rem; 
   border: 1px solid #d7dfe9;
   &::placeholder {
     font-family: HK Grotesk;
-    font-size: 0.875rem; /* 14px in rem */
+    font-size: 0.875rem; 
     font-weight: 400;
-    padding-left: 0.625rem; /* 10px in rem */
+    padding-left: 0.625rem; 
     color: ${(props) => props.color};
   }
 `;
 
 const Button = styled.button`
-  width: 5.8125rem; /* 93px in rem */
-  height: 2.5rem; /* 40px in rem */
-  padding: 0.5rem 1.25rem; /* 8px 20px in rem */
-  border-radius: 0.25rem; /* 4px in rem */
+  width: 5.8125rem; 
+  height: 2.5rem;
+  padding: 0.5rem 1.25rem; 
+  border-radius: 0.25rem; 
   background: #0b69ff;
   border: none;
   color: #ffffff;
-  margin-top: 6.25rem; /* 100px in rem */
+  margin-top: 6.25rem; 
 `;
 
 const TextArea = styled.textarea`
-  width: 19.5rem; /* 312px in rem */
-  height: 5rem; /* 80px in rem */
-  margin-top: 2rem; /* 32px in rem */
+  width: 19.5rem; 
+  height: 5rem; 
+  margin-top: 2rem; 
   gap: 0;
-  border-radius: 0.125rem 0 0 0; /* 2px in rem */
+  border-radius: 0.125rem 0 0 0; 
   border: 1px solid transparent;
   background: #ffffff;
   border: 1px solid #d7dfe9;
   &::placeholder {
     font-family: HK Grotesk;
-    font-size: 0.875rem; /* 14px in rem */
+    font-size: 0.875rem; 
     font-weight: 400;
-    padding-left: 0.625rem; /* 10px in rem */
-    padding-top: 0.625rem; /* 10px in rem */
+    padding-left: 0.625rem; 
+    padding-top: 0.625rem;
   }
 `;
 
 const Dropdown = styled.select`
   background: #ffffff;
-  width: 20rem; /* 320px in rem */
-  height: 2.5rem; /* 40px in rem */
-  margin-top: 0.5rem; /* 8px in rem */
+  width: 20rem; 
+  height: 2.5rem; 
+  margin-top: 0.5rem; 
   gap: 0;
-  border-radius: 0.125rem; /* 2px in rem */
+  border-radius: 0.125rem; 
   border: 1px solid #d7dfe9;
 `;
 
@@ -130,7 +129,7 @@ export const Hero = () => {
     },
   });
 
-  const onSubmit: SubmitHandler<FormData> = async (data) => {
+  const onSubmit: SubmitHandler<FormData> = async () => {
     try {
       // await addResources(data);
       navigate("/resources");
